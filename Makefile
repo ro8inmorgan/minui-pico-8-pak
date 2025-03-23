@@ -1,7 +1,7 @@
 PAK_NAME := $(shell jq -r .label config.json)
 
 ARCHITECTURES := arm64 arm
-PLATFORMS := tg5040 rg35xxplus rg35xx
+PLATFORMS := magicmini tg5040 rg35xxplus rg35xx zero28
 MINUI_PRESENTER_VERSION := 0.4.0
 
 clean:
