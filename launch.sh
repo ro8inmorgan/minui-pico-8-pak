@@ -11,6 +11,7 @@ exec 2>&1
 echo "$0" "$*"
 cd "$PAK_DIR" || exit 1
 mkdir -p "$USERDATA_PATH/Pico-8-native"
+mkdir -p "$SHARED_USERDATA_PATH/Pico-8-native"
 
 architecture=arm
 if uname -m | grep -q '64'; then
@@ -18,12 +19,12 @@ if uname -m | grep -q '64'; then
 fi
 
 export EMU_DIR="$PAK_DIR/pico8"
-export HOME="$USERDATA_PATH/Pico-8-native"
+export HOME="$SHARED_USERDATA_PATH/Pico-8-native"
 export PATH="$EMU_DIR:$PAK_DIR/bin/$PLATFORM:$PAK_DIR/bin/$architecture:$PAK_DIR/bin:$PATH"
-export XDG_CONFIG_HOME="$USERDATA_PATH/Pico-8-native/config"
-export XDG_DATA_HOME="$USERDATA_PATH/Pico-8-native/data"
+export XDG_CONFIG_HOME="$HOME/config"
+export XDG_DATA_HOME="$HOME/data"
 
-export GAMESETTINGS_DIR="$USERDATA_PATH/Pico-8-native/game-settings/$ROM_NAME"
+export GAMESETTINGS_DIR="$HOME/game-settings/$ROM_NAME"
 export SCREENSHOT_DIR="$SDCARD_PATH/Screenshots"
 
 copy_carts() {
