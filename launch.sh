@@ -26,6 +26,23 @@ export XDG_DATA_HOME="$USERDATA_PATH/Pico-8-native/data"
 export GAMESETTINGS_DIR="$USERDATA_PATH/Pico-8-native/game-settings/$ROM_NAME"
 export SCREENSHOT_DIR="$SDCARD_PATH/Screenshots"
 
+copy_carts() {
+    ROM_FOLDER="$1"
+
+    for cart in "$HOME/bbs/carts"/*.p8.png; do
+        # remove the -0.p8.png extension
+        CART_NAME="${cart%-0.p8.png}"
+        FILENAME="$(basename "$CART_NAME")"
+
+        if [ -f "$HOME/bbs/carts/temp-$FILENAME.nfo" ]; then
+            TITLE="$(grep title: "$HOME/bbs/carts/temp-$FILENAME.nfo" | cut -d: -f2-)"
+            cp -f "$cart" "$ROM_FOLDER/$TITLE.p8"
+        else
+            cp -f "$cart" "$ROM_FOLDER/$FILENAME.p8"
+        fi
+    done
+}
+
 launch_cart() {
     ROM_PATH="$1"
     cp -f "$PAK_DIR/controllers/$PLATFORM.txt" "$HOME/sdl_controllers.txt"
@@ -52,6 +69,8 @@ launch_cart() {
             "$pico_bin" -splore -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
         fi
         sync
+
+        copy_carts "$ROM_FOLDER"
         ;;
     *)
         if [ "$PLATFORM" = "tg5040" ]; then
