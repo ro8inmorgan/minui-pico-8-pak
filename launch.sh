@@ -78,16 +78,6 @@ verify_platform() {
         show_message "wget not found" 2
         return 1
     fi
-
-    if ! command -v curl >/dev/null 2>&1; then
-        show_message "curl not found" 2
-        return 1
-    fi
-
-    if ! command -v curl-config >/dev/null 2>&1; then
-        show_message "curl-config not found" 2
-        return 1
-    fi
 }
 
 install_pico_files() {
