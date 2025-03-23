@@ -1,10 +1,2 @@
-bin/magicmini/minui-presenter
-bin/magicmini/wget
-bin/rg35xx/minui-presenter
-bin/rg35xx/wget
-bin/rg35xxplus/minui-presenter
-bin/rg35xxplus/wget
 bin/tg5040/minui-presenter
 bin/tg5040/wget
-bin/zero28/minui-presenter
-bin/zero28/wget
