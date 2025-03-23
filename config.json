@@ -1,5 +1,5 @@
 {
-    "label": "PICO-8",
+    "label": "PICO",
     "launch": "launch.sh",
     "description": "Runs pico-8 in standalone mode",
     "platforms": [
