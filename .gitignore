@@ -6,3 +6,5 @@ res/fonts/*
 
 !bin/arm64/power-button-monitor
 !bin/tg5040/power-button-pressed
+!bin/tg5040/wget
+!bin/tg5040/wget-original
