@@ -10,18 +10,17 @@ exec 2>&1
 
 echo "$0" "$*"
 cd "$PAK_DIR" || exit 1
-mkdir -p "$USERDATA_PATH/$PAK_NAME"
+mkdir -p "$USERDATA_PATH/Pico-8-native"
 
-ARCHITECTURE=arm
+architecture=arm
 if uname -m | grep -q '64'; then
-    ARCHITECTURE=arm64
+    architecture=arm64
 fi
 
-export EMU_DIR="$SDCARD_PATH/Emus/$PLATFORM/Pico-8.pak/pico8"
-export PAK_DIR="$SDCARD_PATH/Emus/$PLATFORM/Pico-8.pak"
+export EMU_DIR="$PAK_DIR/pico8"
 export HOME="$USERDATA_PATH/Pico-8-native"
-export LD_LIBRARY_PATH="$EMU_DIR/lib:$PAK_DIR/lib/$PLATFORM:$PAK_DIR/lib/$ARCHITECTURE:$LD_LIBRARY_PATH"
-export PATH="$EMU_DIR:$PAK_DIR/bin/$PLATFORM:$PAK_DIR/bin/$ARCHITECTURE:$PAK_DIR/bin:$PATH"
+export LD_LIBRARY_PATH="$EMU_DIR/lib:$PAK_DIR/lib/$PLATFORM:$PAK_DIR/lib/$architecture:$LD_LIBRARY_PATH"
+export PATH="$EMU_DIR:$PAK_DIR/bin/$PLATFORM:$PAK_DIR/bin/$architecture:$PAK_DIR/bin:$PATH"
 export XDG_CONFIG_HOME="$USERDATA_PATH/Pico-8-native/config"
 export XDG_DATA_HOME="$USERDATA_PATH/Pico-8-native/data"
 
@@ -36,7 +35,7 @@ launch_cart() {
     echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 
     pico_bin="pico8_dyn"
-    if [ "$ARCHITECTURE" = "arm64" ]; then
+    if [ "$architecture" = "arm64" ]; then
         pico_bin="pico8_64"
     fi
 
@@ -130,6 +129,9 @@ main() {
         export DEVICE="brick"
         export PLATFORM="tg5040"
     fi
+
+    env | sort
+    sleep 1
 
     if ! verify_platform; then
         return 1
