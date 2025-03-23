@@ -66,7 +66,7 @@ launch_cart() {
 }
 
 verify_platform() {
-    allowed_platforms="tg5040 rg35xxplus rg35xx"
+    allowed_platforms="tg5040"
     if ! echo "$allowed_platforms" | grep -q "$PLATFORM"; then
         show_message "$PLATFORM is not a supported platform" 2
         return 1
