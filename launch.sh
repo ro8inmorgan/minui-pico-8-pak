@@ -64,6 +64,12 @@ launch_cart() {
 
     case "$ROM_NAME" in
     "Splore.p8" | "splore.p8")
+        enabled="$(cat /sys/class/net/wlan0/operstate 2>/dev/null)"
+        if [ "$enabled" != "up" ]; then
+            show_message "Required wifi connection is not available." 2
+            return 1
+        fi
+
         if [ "$PLATFORM" = "tg5040" ]; then
             "$pico_bin" -preblit_scale 3 -splore -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
         else
