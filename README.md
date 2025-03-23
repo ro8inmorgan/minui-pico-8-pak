@@ -58,6 +58,10 @@ To exit Splore, choose a game and follow the normal process of exiting a game.
 
 A sample `Splore.p8` file is included in the base of this repository.
 
+### Sleep Mode
+
+Built-in MinUI cores have support for turning off the display and eventually shutting down when the power button is pressed. Standalone emulators do not have this functionality due to needing support inside of the console for this. At this time, this pak does not implement sleep mode.
+
 ### Debug Logging
 
 To enable debug logging, create a file named debug in `$SDCARD_PATH/.userdata/$PLATFORM/N64-mupen64plus` folder. Logs will be written to the`$SDCARD_PATH/.userdata/$PLATFORM/logs/` folder.
