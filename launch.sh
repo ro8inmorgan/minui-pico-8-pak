@@ -138,9 +138,6 @@ main() {
         export PLATFORM="tg5040"
     fi
 
-    env | sort
-    sleep 1
-
     if ! verify_platform; then
         return 1
     fi
