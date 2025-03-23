@@ -19,7 +19,6 @@ fi
 
 export EMU_DIR="$PAK_DIR/pico8"
 export HOME="$USERDATA_PATH/Pico-8-native"
-export LD_LIBRARY_PATH="$EMU_DIR/lib:$PAK_DIR/lib/$PLATFORM:$PAK_DIR/lib/$architecture:$LD_LIBRARY_PATH"
 export PATH="$EMU_DIR:$PAK_DIR/bin/$PLATFORM:$PAK_DIR/bin/$architecture:$PAK_DIR/bin:$PATH"
 export XDG_CONFIG_HOME="$USERDATA_PATH/Pico-8-native/config"
 export XDG_DATA_HOME="$USERDATA_PATH/Pico-8-native/data"
@@ -34,27 +33,32 @@ launch_cart() {
 
     echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 
-    pico_bin="pico8_dyn"
-    if [ "$architecture" = "arm64" ]; then
-        pico_bin="pico8_64"
+    pico_bin="pico8_64"
+    if [ "$architecture" = "arm" ]; then
+        pico_bin="pico8"
     fi
 
-    cart_path="$(dirname "$ROM_PATH")"
+    ROM_NAME="$(basename "$ROM_PATH")"
+    mkdir -p "$HOME/carts"
+    cp -f "$ROM_PATH" "$HOME/carts/$ROM_NAME"
+
+    # only set LD_LIBRARY_PATH for pico8
+    export LD_LIBRARY_PATH="$EMU_DIR/lib:$PAK_DIR/lib/$PLATFORM:$PAK_DIR/lib/$architecture:$LD_LIBRARY_PATH"
 
     case "$ROM_PATH" in
     *"Splore"* | *"splore"*)
         if [ "$PLATFORM" = "tg5040" ]; then
-            "$pico_bin" -preblit_scale 3 -splore -joystick 0 -root_path "$cart_path" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
+            "$pico_bin" -preblit_scale 3 -splore -joystick 0 -root_path "$HOME/carts" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
         else
-            "$pico_bin" -splore -joystick 0 -root_path "$cart_path" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
+            "$pico_bin" -splore -joystick 0 -root_path "$HOME/carts" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
         fi
         sync
         ;;
     *)
         if [ "$PLATFORM" = "tg5040" ]; then
-            "$pico_bin" -preblit_scale 3 -run "$ROM_PATH" -joystick 0 -root_path "$cart_path" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
+            "$pico_bin" -preblit_scale 3 -run "$HOME/carts/$ROM_NAME" -joystick 0 -root_path "$HOME/carts" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
         else
-            "$pico_bin" -run "$ROM_PATH" -joystick 0 -root_path "$cart_path" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
+            "$pico_bin" -run "$HOME/carts/$ROM_NAME" -joystick 0 -root_path "$HOME/carts" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
         fi
         sync
         ;;
@@ -80,23 +84,27 @@ verify_platform() {
 }
 
 install_pico_files() {
-    pico_bin="pico8_dyn"
-    if [ "$ARCHITECTURE" = "arm64" ]; then
-        pico_bin="pico8_64"
+    pico_bin="pico8_64"
+    if [ "$architecture" = "arm" ]; then
+        pico_bin="pico8"
     fi
 
-    if [ ! -f "$EMU_DIR/bin/$pico_bin" ]; then
-        test -f "$SDCARD_PATH/$pico_bin" && mv -f "$SDCARD_PATH/$pico_bin" "$EMU_DIR/bin/$pico_bin"
+    mkdir -p "$EMU_DIR"
+    if [ ! -f "$EMU_DIR/$pico_bin" ] && [ -f "$SDCARD_PATH/Bios/PICO/$pico_bin" ]; then
+        show_message "Copying $pico_bin to $EMU_DIR" forever
+        cp -f "$SDCARD_PATH/Bios/PICO/$pico_bin" "$EMU_DIR/$pico_bin"
     fi
 
-    if [ ! -f "$EMU_DIR/pico8.dat" ]; then
-        test -f "$SDCARD_PATH/pico8.dat" && mv -f "$SDCARD_PATH/pico8.dat" "$EMU_DIR/pico8.dat"
+    if [ ! -f "$EMU_DIR/pico8.dat" ] && [ -f "$SDCARD_PATH/Bios/PICO/pico8.dat" ]; then
+        show_message "Copying pico8.dat to $EMU_DIR" forever
+        cp -f "$SDCARD_PATH/Bios/PICO/pico8.dat" "$EMU_DIR/pico8.dat"
     fi
 
-    if [ ! -f "$EMU_DIR/bin/$pico_bin" ] || [ ! -f "$EMU_DIR/pico8.dat" ]; then
-        minui-presenter --message "Missing $pico_bin or pico8.dat. Please copy them to the root of your SD card." --timeout 4
+    if [ ! -f "$EMU_DIR/$pico_bin" ] || [ ! -f "$EMU_DIR/pico8.dat" ]; then
+        show_message "Missing $pico_bin or pico8.dat. Please copy them to the Bios/PICO directory at the root of your SD card." 4
         return 1
     fi
+    killall minui-presenter >/dev/null 2>&1 || true
 }
 
 show_message() {
