@@ -2,4 +2,4 @@
 
 # the tg5040 doesn't have up to date certificates
 # so we need to disable certificate checking
-wget --no-check-certificate "$@"
+wget-original --no-check-certificate "$@"
