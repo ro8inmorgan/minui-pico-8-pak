@@ -61,8 +61,8 @@ launch_cart() {
     # only set LD_LIBRARY_PATH for pico8
     export LD_LIBRARY_PATH="$EMU_DIR/lib:$PAK_DIR/lib/$PLATFORM:$PAK_DIR/lib/$architecture:$LD_LIBRARY_PATH"
 
-    case "$ROM_PATH" in
-    *"Splore"* | *"splore"*)
+    case "$ROM_NAME" in
+    "Splore.p8" | "splore.p8")
         if [ "$PLATFORM" = "tg5040" ]; then
             "$pico_bin" -preblit_scale 3 -splore -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
         else
