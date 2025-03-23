@@ -38,9 +38,8 @@ launch_cart() {
         pico_bin="pico8"
     fi
 
+    ROM_FOLDER="$(dirname "$ROM_PATH")"
     ROM_NAME="$(basename "$ROM_PATH")"
-    mkdir -p "$HOME/carts"
-    cp -f "$ROM_PATH" "$HOME/carts/$ROM_NAME"
 
     # only set LD_LIBRARY_PATH for pico8
     export LD_LIBRARY_PATH="$EMU_DIR/lib:$PAK_DIR/lib/$PLATFORM:$PAK_DIR/lib/$architecture:$LD_LIBRARY_PATH"
@@ -48,17 +47,17 @@ launch_cart() {
     case "$ROM_PATH" in
     *"Splore"* | *"splore"*)
         if [ "$PLATFORM" = "tg5040" ]; then
-            "$pico_bin" -preblit_scale 3 -splore -joystick 0 -root_path "$HOME/carts" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
+            "$pico_bin" -preblit_scale 3 -splore -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
         else
-            "$pico_bin" -splore -joystick 0 -root_path "$HOME/carts" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
+            "$pico_bin" -splore -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
         fi
         sync
         ;;
     *)
         if [ "$PLATFORM" = "tg5040" ]; then
-            "$pico_bin" -preblit_scale 3 -run "$HOME/carts/$ROM_NAME" -joystick 0 -root_path "$HOME/carts" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
+            "$pico_bin" -preblit_scale 3 -run "$ROM_PATH" -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
         else
-            "$pico_bin" -run "$HOME/carts/$ROM_NAME" -joystick 0 -root_path "$HOME/carts" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
+            "$pico_bin" -run "$ROM_PATH" -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
         fi
         sync
         ;;
