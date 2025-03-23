@@ -110,6 +110,23 @@ install_pico_files() {
     fi
 }
 
+show_message() {
+    message="$1"
+    seconds="$2"
+
+    if [ -z "$seconds" ]; then
+        seconds="forever"
+    fi
+
+    killall minui-presenter >/dev/null 2>&1 || true
+    echo "$message" 1>&2
+    if [ "$seconds" = "forever" ]; then
+        minui-presenter --message "$message" --timeout -1 &
+    else
+        minui-presenter --message "$message" --timeout "$seconds"
+    fi
+}
+
 cleanup() {
     rm -f /tmp/stay_awake
     killall minui-presenter >/dev/null 2>&1 || true
