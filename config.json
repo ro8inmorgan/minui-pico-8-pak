@@ -1,0 +1,8 @@
+{
+    "label": "PICO-8",
+    "launch": "launch.sh",
+    "description": "Runs pico-8 in standalone mode",
+    "platforms": [
+        "tg5040"
+    ]
+}

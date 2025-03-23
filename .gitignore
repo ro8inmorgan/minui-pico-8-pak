@@ -1,0 +1,8 @@
+dist
+bin/*
+!bin/.gitkeep
+res/fonts/*
+!res/fonts/.gitkeep
+
+!bin/arm64/power-button-monitor
+!bin/tg5040/power-button-pressed
