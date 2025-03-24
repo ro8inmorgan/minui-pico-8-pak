@@ -26,7 +26,7 @@ To being, make sure your MinUI SD card is mounted.
 
 ### Installing the BIOS
 
-> [!IMPORTANT]
+> [!WARNING]
 > This step is required or the Pico-8 emulator will fail to load.
 
 1. Download the `Raspberry PI` Pico-8 zip. As of this time of writing, it will be `pico-8_0.2.6b_raspi.zip`, available from the [Lexaloffle site](https://www.lexaloffle.com/pico-8.php).
