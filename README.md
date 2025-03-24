@@ -12,18 +12,37 @@ Use the correct platform for your device.
 
 ## Installation
 
-> [!IMPORTANT]
+> [!NOTE]
 > This emulator pack requires a paid copy of Pico-8. Please purchase this from [the official Pico-8 page](https://www.lexaloffle.com/pico-8.php). No Pico-8 binaries will be provided otherwise.
 
-1. Mount your MinUI SD card.
-2. Download the latest release from Github. It will be named `PICO.pak.zip`.
-3. Copy the zip file to `/Emus/$PLATFORM/PICO.pak.zip`.
-4. Extract the zip in place, then delete the zip file.
-5. Confirm that there is a `/Emus/$PLATFORM/N64.pak/launch.sh` file on your SD card.
-6. Create a folder at `/Roms/Pico-8 (PICO)` and place your roms in this directory.
-7. Download the `Raspberry PI` Pico-8 zip. As of this time of writing, it will be `pico-8_0.2.6b_raspi.zip`, available from the Lexaloffle site.
-8. Extract the `pico-8_0.2.6b_raspi.zip` zip and place the `pico8`, `pico8_64`, and `pico8.dat` in the `/Bios/PICO` folder on your SD card.
-9. Unmount your SD Card and insert it into your MinUI device.
+To being, make sure your MinUI SD card is mounted.
+
+### Installing the Emulator
+
+1. Download the latest release from Github. It will be named `PICO.pak.zip`.
+2. Copy the zip file to `/Emus/$PLATFORM/PICO.pak.zip`.
+3. Extract the zip in place, then delete the zip file.
+4. Confirm that there is a `/Emus/$PLATFORM/PICO.pak/launch.sh` file on your SD card.
+
+### Installing the BIOS
+
+> [!IMPORTANT]
+> This step is required or the Pico-8 emulator will fail to load.
+
+1. Download the `Raspberry PI` Pico-8 zip. As of this time of writing, it will be `pico-8_0.2.6b_raspi.zip`, available from the [Lexaloffle site](https://www.lexaloffle.com/pico-8.php).
+2. Extract the `pico-8_0.2.6b_raspi.zip` zip and place the `pico8`, `pico8_64`, and `pico8.dat` in the `/Bios/PICO` folder on your SD card.
+
+### Downloading Roms
+
+1. Create a folder at `/Roms/Pico-8 (PICO)`
+2. Create an empty file named `Splore.png` in `/Roms/Pico-8 (PICO)` for Splore support.
+3. Place your roms in this directory.
+  1. See [this itch.io link](https://itch.io/games/downloadable/free/tag-pico-8) for free downloadable Pico-8 games.
+
+### Finishing up
+
+1. Unmount your SD Card
+2. Insert it into your MinUI device.
 
 ## Usage
 
@@ -64,4 +83,4 @@ Built-in MinUI cores have support for turning off the display and eventually shu
 
 ### Debug Logging
 
-To enable debug logging, create a file named debug in `$SDCARD_PATH/.userdata/$PLATFORM/N64-mupen64plus` folder. Logs will be written to the`$SDCARD_PATH/.userdata/$PLATFORM/logs/` folder.
+To enable debug logging, create a file named debug in `$SDCARD_PATH/.userdata/$PLATFORM/Pico-8-native` folder. Logs will be written to the`$SDCARD_PATH/.userdata/$PLATFORM/logs/` folder.
