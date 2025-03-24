@@ -87,7 +87,7 @@ launch_cart() {
     export LD_LIBRARY_PATH="$EMU_DIR/lib:$PAK_DIR/lib/$PLATFORM:$PAK_DIR/lib/$architecture:$LD_LIBRARY_PATH"
 
     case "$ROM_NAME" in
-    "Splore.p8" | "splore.p8")
+    *"Splore"* | *"splore"*)
         enabled="$(cat /sys/class/net/wlan0/operstate 2>/dev/null)"
         if [ "$enabled" != "up" ]; then
             show_message "Required wifi connection is not available." 2
