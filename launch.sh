@@ -56,9 +56,24 @@ get_pico_bin() {
     echo "$pico_bin"
 }
 
+get_controller_file() {
+    if [ "$PLATFORM" = "rg35xxplus" ]; then
+        case "$DEVICE" in
+        "cube")
+            echo "rg35xxplus-cube.txt"
+            ;;
+        *)
+            echo "rg35xxplus.txt"
+            ;;
+        esac
+    else
+        echo "$PLATFORM.txt"
+    fi
+}
+
 launch_cart() {
     ROM_PATH="$1"
-    cp -f "$PAK_DIR/controllers/$PLATFORM.txt" "$HOME/sdl_controllers.txt"
+    cp -f "$PAK_DIR/controllers/$(get_controller_file)" "$HOME/sdl_controllers.txt"
     cp -f "$PAK_DIR/config/$PLATFORM.txt" "$HOME/config.txt"
 
     echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
