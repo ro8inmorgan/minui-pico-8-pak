@@ -35,7 +35,7 @@ To being, make sure your MinUI SD card is mounted.
 ### Downloading Roms
 
 1. Create a folder at `/Roms/Pico-8 (PICO)`
-2. Create an empty file named `Splore.png` in `/Roms/Pico-8 (PICO)` for Splore support.
+2. Create an empty file named `Splore.p8` in `/Roms/Pico-8 (PICO)` for Splore support.
 3. Place your roms in this directory.
   1. See [this itch.io link](https://itch.io/games/downloadable/free/tag-pico-8) for free downloadable Pico-8 games.
 
