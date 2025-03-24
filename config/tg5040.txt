@@ -9,8 +9,8 @@
 
 // :: Video Settings
 
-window_size 640 480 // window width, height
-screen_size 1280 720 // screen width, height (stretched to window) 
+// window_size 640 480 // window width, height
+// screen_size 1280 720 // screen width, height (stretched to window) 
 show_fps 0 // Draw frames per second in the corner
 
 
@@ -28,7 +28,7 @@ blit_method 0  // 0 auto  1 software (slower but sometimes more reliable)  2 har
 
 foreground_sleep_ms 4 // number of milliseconds to sleep each frame. Try 10 to conserve battery power
 
-background_sleep_ms 8 // number of milliseconds to sleep each frame when running in the background
+background_sleep_ms 10 // number of milliseconds to sleep each frame when running in the background
 
 sessions 0 // number of times program has been run
 
@@ -76,7 +76,7 @@ root_path /mnt/SDCARD/Roms/Pico-8 (PICO)/
 
 
 // Location of cartridge save data
-cdata_path /mnt/SDCARD/.userdata/tg5040/Pico-8-native/cdata/
+cdata_path /mnt/SDCARD/.userdata/shared/Pico-8-native/cdata/
 
 
 // Specify which player index joystick control begins at (0..7)
@@ -105,13 +105,13 @@ screenshot_scale 3
 gif_scale 2
 
 // maximum gif length in seconds (0..120; 0 means no gif recording)
-gif_len 8
+gif_len 16
 
 // when 1, reset the recording when pressing ctrl-9 (useful for creating a non-overlapping sequence)
 gif_reset_mode 0
 
 // 0 for off. 1 for auto. 2 to allow control of a cart's framerate due to host machine's cpu capacity
-host_framerate_control 0
+host_framerate_control 1
 
 // filter splore cartridges
 // 0 off   1 on (exclude cartridge tagged as 'mature' by community)
@@ -124,7 +124,7 @@ tab_width 1
 draw_tabs 0
 
 // 0 off 1 on: record the current cartridge and editor view every 3 seconds (see [appdata]/activity.log.txt)
-record_activity_log 0
+record_activity_log 1
 
 // 0 off 1 on: allow F6..F9 (alternative: ctrl 6..9)
 allow_function_keys 1

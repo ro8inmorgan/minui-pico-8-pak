@@ -8,3 +8,6 @@ res/fonts/*
 !bin/tg5040/power-button-pressed
 !bin/tg5040/wget
 !bin/tg5040/wget-original
+!bin/rg35xxplus/power-button-pressed
+!bin/rg35xxplus/wget
+!bin/rg35xxplus/wget-original

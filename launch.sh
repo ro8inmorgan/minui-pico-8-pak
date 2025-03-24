@@ -42,19 +42,43 @@ copy_carts() {
             cp -f "$cart" "$ROM_FOLDER/$FILENAME.p8"
         fi
     done
+    sync
 }
 
-launch_cart() {
-    ROM_PATH="$1"
-    cp -f "$PAK_DIR/controllers/$PLATFORM.txt" "$HOME/sdl_controllers.txt"
-    cp -f "$PAK_DIR/config/$PLATFORM.txt" "$HOME/config.txt"
-
-    echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-
+get_pico_bin() {
     pico_bin="pico8_64"
     if [ "$architecture" = "arm" ]; then
         pico_bin="pico8"
     fi
+    if [ "$PLATFORM" = "rg35xxplus" ]; then
+        pico_bin="pico8_dyn"
+    fi
+    echo "$pico_bin"
+}
+
+get_controller_file() {
+    if [ "$PLATFORM" = "rg35xxplus" ]; then
+        case "$DEVICE" in
+        "cube")
+            echo "rg35xxplus-cube.txt"
+            ;;
+        *)
+            echo "rg35xxplus.txt"
+            ;;
+        esac
+    else
+        echo "$PLATFORM.txt"
+    fi
+}
+
+launch_cart() {
+    ROM_PATH="$1"
+    cp -f "$PAK_DIR/controllers/$(get_controller_file)" "$HOME/sdl_controllers.txt"
+    cp -f "$PAK_DIR/config/$PLATFORM.txt" "$HOME/config.txt"
+
+    echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+    pico_bin="$(get_pico_bin)"
 
     ROM_FOLDER="$(dirname "$ROM_PATH")"
     ROM_NAME="$(basename "$ROM_PATH")"
@@ -70,28 +94,31 @@ launch_cart() {
             return 1
         fi
 
-        if [ "$PLATFORM" = "tg5040" ]; then
-            "$pico_bin" -preblit_scale 3 -splore -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
-        else
-            "$pico_bin" -splore -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
-        fi
-        sync
+        "$pico_bin" \
+            -desktop "$SDCARD_PATH/Screenshots" \
+            -home "$HOME" \
+            -joystick 0 \
+            -root_path "$ROM_FOLDER" \
+            -splore
 
-        copy_carts "$ROM_FOLDER"
         ;;
     *)
-        if [ "$PLATFORM" = "tg5040" ]; then
-            "$pico_bin" -preblit_scale 3 -run "$ROM_PATH" -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
-        else
-            "$pico_bin" -run "$ROM_PATH" -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
-        fi
-        sync
+        "$pico_bin" \
+            -desktop "$SDCARD_PATH/Screenshots" \
+            -home "$HOME" \
+            -joystick 0 \
+            -root_path "$ROM_FOLDER" \
+            -run "$ROM_PATH"
         ;;
     esac
+
+    sync
+    copy_carts "$ROM_FOLDER"
+
 }
 
 verify_platform() {
-    allowed_platforms="tg5040"
+    allowed_platforms="rg35xxplus tg5040"
     if ! echo "$allowed_platforms" | grep -q "$PLATFORM"; then
         show_message "$PLATFORM is not a supported platform" 2
         return 1
@@ -109,10 +136,7 @@ verify_platform() {
 }
 
 install_pico_files() {
-    pico_bin="pico8_64"
-    if [ "$architecture" = "arm" ]; then
-        pico_bin="pico8"
-    fi
+    pico_bin="$(get_pico_bin)"
 
     mkdir -p "$EMU_DIR"
     if [ ! -f "$EMU_DIR/$pico_bin" ] && [ -f "$SDCARD_PATH/Bios/PICO/$pico_bin" ]; then
@@ -190,8 +214,6 @@ main() {
             sleep 1
         done
     fi
-
-    kill "$!"
 }
 
 main "$@"

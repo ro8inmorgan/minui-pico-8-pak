@@ -3,6 +3,7 @@
     "launch": "launch.sh",
     "description": "Runs pico-8 in standalone mode",
     "platforms": [
+        "rg35xxplus",
         "tg5040"
     ]
 }

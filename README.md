@@ -6,6 +6,7 @@ A pak wrapping PICO-8, a fantasy video game console.
 
 This pak is designed and tested on the following MinUI Platforms and devices:
 
+- `rg35xxplus`: RG-CubeXX
 - `tg5040`: Trimui Brick (formerly `tg3040`)
 
 Use the correct platform for your device.
@@ -30,14 +31,14 @@ To being, make sure your MinUI SD card is mounted.
 > This step is required or the Pico-8 emulator will fail to load.
 
 1. Download the `Raspberry PI` Pico-8 zip. As of this time of writing, it will be `pico-8_0.2.6b_raspi.zip`, available from the [Lexaloffle site](https://www.lexaloffle.com/pico-8.php).
-2. Extract the `pico-8_0.2.6b_raspi.zip` zip and place the `pico8`, `pico8_64`, and `pico8.dat` in the `/Bios/PICO` folder on your SD card.
+2. Extract the `pico-8_0.2.6b_raspi.zip` zip and place the `pico8`, `pico8_dyn`, `pico8_64`, and`pico8.dat` in the `/Bios/PICO` folder on your SD card.
 
 ### Downloading Roms
 
 1. Create a folder at `/Roms/Pico-8 (PICO)`
 2. Create an empty file named `Splore.p8` in `/Roms/Pico-8 (PICO)` for Splore support.
 3. Place your roms in this directory.
-  1. See [this itch.io link](https://itch.io/games/downloadable/free/tag-pico-8) for free downloadable Pico-8 games.
+    1. See [this itch.io link](https://itch.io/games/downloadable/free/tag-pico-8) for free downloadable Pico-8 games.
 
 ### Finishing up
 
