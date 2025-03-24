@@ -51,7 +51,7 @@ Browse to `Pico-8` and press `A` to play a game.
 
 The following filetypes are supported:
 
-- Native: `.p8`
+- Native: `.p8`, `.p8.png`
 
 ### Exiting a game
 
