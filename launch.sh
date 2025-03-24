@@ -94,24 +94,27 @@ launch_cart() {
             return 1
         fi
 
-        if [ "$PLATFORM" = "tg5040" ]; then
-            "$pico_bin" -preblit_scale 3 -splore -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
-        else
-            "$pico_bin" -splore -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
-        fi
-        sync
+        "$pico_bin" \
+            -desktop "$SDCARD_PATH/Screenshots" \
+            -home "$HOME" \
+            -joystick 0 \
+            -root_path "$ROM_FOLDER" \
+            -splore \
 
-        copy_carts "$ROM_FOLDER"
         ;;
     *)
-        if [ "$PLATFORM" = "tg5040" ]; then
-            "$pico_bin" -preblit_scale 3 -run "$ROM_PATH" -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
-        else
-            "$pico_bin" -run "$ROM_PATH" -joystick 0 -root_path "$ROM_FOLDER" -home "$HOME" -desktop "$SDCARD_PATH/Screenshots"
-        fi
-        sync
+        "$pico_bin" \
+            -desktop "$SDCARD_PATH/Screenshots" \
+            -home "$HOME" \
+            -joystick 0 \
+            -root_path "$ROM_FOLDER" \
+            -run "$ROM_PATH" \
         ;;
     esac
+
+    sync
+    copy_carts "$ROM_FOLDER"
+
 }
 
 verify_platform() {
