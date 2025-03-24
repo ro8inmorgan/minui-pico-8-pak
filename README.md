@@ -12,7 +12,7 @@ Use the correct platform for your device.
 
 ## Installation
 
-> [!NOTE]
+> [!IMPORTANT]
 > This emulator pack requires a paid copy of Pico-8. Please purchase this from [the official Pico-8 page](https://www.lexaloffle.com/pico-8.php). No Pico-8 binaries will be provided otherwise.
 
 To being, make sure your MinUI SD card is mounted.
