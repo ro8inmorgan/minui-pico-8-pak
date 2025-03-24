@@ -72,11 +72,11 @@ volume 256
 
 
 // Location of pico-8's root folder
-root_path /mnt/SDCARD/Roms/Pico-8 (PICO)/
+root_path /mnt/sdcard/Roms/Pico-8 (PICO)/
 
 
 // Location of cartridge save data
-cdata_path /mnt/SDCARD/.userdata/shared/Pico-8-native/cdata/
+cdata_path /mnt/sdcard/.userdata/shared/Pico-8-native/cdata/
 
 
 // Specify which player index joystick control begins at (0..7)

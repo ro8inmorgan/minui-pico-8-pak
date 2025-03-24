@@ -6,6 +6,7 @@ A pak wrapping PICO-8, a fantasy video game console.
 
 This pak is designed and tested on the following MinUI Platforms and devices:
 
+- `rg35xxplus`: RG-35XX Plus, RG-34XX, RG-35XX H, RG-35XX SP
 - `tg5040`: Trimui Brick (formerly `tg3040`)
 
 Use the correct platform for your device.
@@ -37,7 +38,7 @@ To being, make sure your MinUI SD card is mounted.
 1. Create a folder at `/Roms/Pico-8 (PICO)`
 2. Create an empty file named `Splore.p8` in `/Roms/Pico-8 (PICO)` for Splore support.
 3. Place your roms in this directory.
-  1. See [this itch.io link](https://itch.io/games/downloadable/free/tag-pico-8) for free downloadable Pico-8 games.
+    1. See [this itch.io link](https://itch.io/games/downloadable/free/tag-pico-8) for free downloadable Pico-8 games.
 
 ### Finishing up
 
