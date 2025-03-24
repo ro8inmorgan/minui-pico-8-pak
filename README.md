@@ -6,7 +6,7 @@ A pak wrapping PICO-8, a fantasy video game console.
 
 This pak is designed and tested on the following MinUI Platforms and devices:
 
-- `rg35xxplus`: RG-35XX Plus, RG-34XX, RG-35XX H, RG-35XX SP
+- `rg35xxplus`: RG-CubeXX
 - `tg5040`: Trimui Brick (formerly `tg3040`)
 
 Use the correct platform for your device.
