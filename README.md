@@ -88,6 +88,9 @@ As an example, [Poom](https://freds72.itch.io/poom) - a Doom clone written for P
 2. Place all the files from the `poom_1.9_standalone.zip` download in that folder. There should be 32 files in total, 28 `.p8` files and 4 `.lua` files.
 3. Create a file named `Poom.m3u` in `/Roms/Pico-8 (PICO)/Poom`. The contents of this file are the `p8` files in load order, and should be as follows:
 
+    <details>
+    <summary><b>Poom.m3u</b></summary>
+
     ```
     poom_0.p8
     poom_1.p8
@@ -119,11 +122,14 @@ As an example, [Poom](https://freds72.itch.io/poom) - a Doom clone written for P
     poom_e2.p8
     ```
 
+    </details>
+
 4. Unmount your SD Card.
 5. Insert your SD Card into your MinUI device.
-6. Browse to `Pico-8 > Poom` and press the `A` button to start the game.
+6. In MinUI, Browse to `Pico-8 > Poom` and press the `A` button to start the game.
 
-Note that if any resources are missing from the folder containing your `m3u` file, the game may fail to load.
+> [!WARNING]
+> If any resources are missing from the folder containing your `m3u` file, the game may fail to load.
 
 ### Sleep Mode
 
