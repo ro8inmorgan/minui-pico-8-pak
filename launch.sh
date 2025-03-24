@@ -56,48 +56,6 @@ get_pico_bin() {
     echo "$pico_bin"
 }
 
-get_window_height() {
-    if [ "$PLATFORM" = "rg35xxplus" ]; then
-        case "$DEVICE" in
-        "cube")
-            echo "720"
-            ;;
-        esac
-    elif [ "$PLATFORM" = "tg5040" ]; then
-        case "$DEVICE" in
-        "brick")
-            echo "1024"
-            ;;
-        *)
-            echo "1280"
-            ;;
-        esac
-    else
-        return 1
-    fi
-}
-
-get_window_width() {
-    if [ "$PLATFORM" = "rg35xxplus" ]; then
-        case "$DEVICE" in
-        "cube")
-            echo "720"
-            ;;
-        esac
-    elif [ "$PLATFORM" = "tg5040" ]; then
-        case "$DEVICE" in
-        "brick")
-            echo "768"
-            ;;
-        *)
-            echo "720"
-            ;;
-        esac
-    else
-        return 1
-    fi
-}
-
 get_controller_file() {
     if [ "$PLATFORM" = "rg35xxplus" ]; then
         case "$DEVICE" in
@@ -141,9 +99,7 @@ launch_cart() {
             -home "$HOME" \
             -joystick 0 \
             -root_path "$ROM_FOLDER" \
-            -splore \
-            -width "$(get_window_width)" \
-            -height "$(get_window_height)"
+            -splore
 
         ;;
     *)
@@ -152,9 +108,7 @@ launch_cart() {
             -home "$HOME" \
             -joystick 0 \
             -root_path "$ROM_FOLDER" \
-            -run "$ROM_PATH" \
-            -width "$(get_window_width)" \
-            -height "$(get_window_height)"
+            -run "$ROM_PATH"
         ;;
     esac
 
