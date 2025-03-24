@@ -190,8 +190,6 @@ main() {
             sleep 1
         done
     fi
-
-    kill "$!"
 }
 
 main "$@"
