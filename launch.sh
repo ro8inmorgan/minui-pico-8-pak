@@ -44,6 +44,17 @@ copy_carts() {
     done
 }
 
+get_pico_bin() {
+    pico_bin="pico8_64"
+    if [ "$architecture" = "arm" ]; then
+        pico_bin="pico8"
+    fi
+    if [ "$PLATFORM" = "rg35xxplus" ]; then
+        pico_bin="pico8_dyn"
+    fi
+    echo "$pico_bin"
+}
+
 launch_cart() {
     ROM_PATH="$1"
     cp -f "$PAK_DIR/controllers/$PLATFORM.txt" "$HOME/sdl_controllers.txt"
@@ -51,10 +62,7 @@ launch_cart() {
 
     echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 
-    pico_bin="pico8_64"
-    if [ "$architecture" = "arm" ]; then
-        pico_bin="pico8"
-    fi
+    pico_bin="$(get_pico_bin)"
 
     ROM_FOLDER="$(dirname "$ROM_PATH")"
     ROM_NAME="$(basename "$ROM_PATH")"
@@ -109,10 +117,7 @@ verify_platform() {
 }
 
 install_pico_files() {
-    pico_bin="pico8_64"
-    if [ "$architecture" = "arm" ]; then
-        pico_bin="pico8"
-    fi
+    pico_bin="$(get_pico_bin)"
 
     mkdir -p "$EMU_DIR"
     if [ ! -f "$EMU_DIR/$pico_bin" ] && [ -f "$SDCARD_PATH/Bios/PICO/$pico_bin" ]; then
