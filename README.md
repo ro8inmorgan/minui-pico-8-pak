@@ -76,7 +76,7 @@ Carts downloaded via Splore will be copied to the `/Roms/Pico-8 (PICO)` folder o
 
 To exit Splore, choose a game and follow the normal process of exiting a game.
 
-A sample `Splore.p8` file is included in the base of this repository.
+A sample `Splore.p8` file is included in the base of this repository. You may wish to name the file `1) Splore.p8` to move it to the top of the game list.
 
 ### Multi-cart Game Support
 
