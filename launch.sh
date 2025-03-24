@@ -42,6 +42,7 @@ copy_carts() {
             cp -f "$cart" "$ROM_FOLDER/$FILENAME.p8"
         fi
     done
+    sync
 }
 
 get_pico_bin() {
