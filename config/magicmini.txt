@@ -18,7 +18,7 @@ show_fps 0 // Draw frames per second in the corner
 
 windowed 0 // 1 to start up in windowed mode
 window_position -1 -1 // x and y position of window (-1, -1 to let the window manager decide)
-frameless 0 // 1 to use a window with no frame
+frameless 1 // 1 to use a window with no frame
 fullscreen_method 1 // 0 maximized window (linux)  1 borderless desktop-sized window  2 hardware fullscreen (warning: erratic behaviour under some drivers)
 blit_method 0  // 0 auto  1 software (slower but sometimes more reliable)  2 hardware (can do filtered scaling) 
 
@@ -26,11 +26,11 @@ blit_method 0  // 0 auto  1 software (slower but sometimes more reliable)  2 har
 
 // :: System Settings
 
-foreground_sleep_ms 1 // number of milliseconds to sleep each frame. Try 10 to conserve battery power
+foreground_sleep_ms 4 // number of milliseconds to sleep each frame. Try 10 to conserve battery power
 
 background_sleep_ms 10 // number of milliseconds to sleep each frame when running in the background
 
-sessions 5 // number of times program has been run
+sessions 0 // number of times program has been run
 
 // (scancode) hold this key down and left-click to simulate right-click
 rmb_key 0 // 0 for none  226 for LALT
@@ -72,11 +72,11 @@ volume 256
 
 
 // Location of pico-8's root folder
-root_path /storage/TF2/Emus/magicmini/PICO.pak/pico8/.lexaloffle/pico-8/carts/
+root_path /storage/TF2/Roms/Pico-8 (PICO)/
 
 
 // Location of cartridge save data
-cdata_path /storage/TF2/Emus/magicmini/PICO.pak/pico8/.lexaloffle/pico-8/cdata/
+cdata_path /storage/TF2/.userdata/shared/Pico-8-native/cdata/
 
 
 // Specify which player index joystick control begins at (0..7)
@@ -154,7 +154,7 @@ periodic_backups 20
 transform_screen 0
 
 // 0 off  > 1: colour to draw pixel grid in the gfx editor at zoom:8 and zoom:4 (16 for black)
-gfx_grid_lines 0
+gfx_grid_lines 16
 
 // file naming for screenshot / gif / wav captures
 // 0 sequential (foo_0.png, foo_1.png)    1 timestamp (foo_20240115_120823.png)
