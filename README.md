@@ -131,10 +131,21 @@ As an example, [Poom](https://freds72.itch.io/poom) - a Doom clone written for P
 > [!WARNING]
 > If any resources are missing from the folder containing your `m3u` file, the game may fail to load.
 
+### Screen Mode
+
+By default, Pico-8 is launched in as a centered square resolution. For some games, it may be desirable to have the screen drawn such that it stretches to cover the entire screen instead of being 1x1 width to height, in a "stretched" mode that simulates widescreen functionality.
+
+To set the screen mode to `stretched`, create a file named `screen-mode` in `$SDCARD_PATH/.userdata/$PLATFORM/Pico-8-native` folder. The contents of this can be either of the following:
+
+- `standard`: the standard screen display, showing the game centered as a square.
+- `stretched`: display the screen stretched to match the width of the device's screen.
+
+Please note that using `stretched` mode may look unnatural for games with circular objects or on 16:9 resolution screens.
+
 ### Sleep Mode
 
 Built-in MinUI cores have support for turning off the display and eventually shutting down when the power button is pressed. Standalone emulators do not have this functionality due to needing support inside of the console for this. At this time, this pak does not implement sleep mode.
 
 ### Debug Logging
 
-To enable debug logging, create a file named debug in `$SDCARD_PATH/.userdata/$PLATFORM/Pico-8-native` folder. Logs will be written to the`$SDCARD_PATH/.userdata/$PLATFORM/logs/` folder.
+To enable debug logging, create a file named `debug` in `$SDCARD_PATH/.userdata/$PLATFORM/Pico-8-native` folder. Logs will be written to the`$SDCARD_PATH/.userdata/$PLATFORM/logs/` folder.

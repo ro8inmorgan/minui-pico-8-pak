@@ -45,6 +45,14 @@ copy_carts() {
     sync
 }
 
+get_screen_mode() {
+    if [ ! -f "$USERDATA_PATH/Pico-8-native/screen-mode" ]; then
+        echo "normal" >"$USERDATA_PATH/Pico-8-native/screen-mode"
+    fi
+
+    cat "$USERDATA_PATH/Pico-8-native/screen-mode"
+}
+
 get_pico_bin() {
     pico_bin="pico8_64"
     if [ "$architecture" = "arm" ]; then
@@ -86,6 +94,15 @@ launch_cart() {
     # only set LD_LIBRARY_PATH for pico8
     export LD_LIBRARY_PATH="$EMU_DIR/lib:$PAK_DIR/lib/$PLATFORM:$PAK_DIR/lib/$architecture:$LD_LIBRARY_PATH"
 
+    draw_rect=""
+    screen_mode="$(get_screen_mode)"
+    if [ "$screen_mode" = "stretched" ] && command -v fbset >/dev/null 2>&1; then
+        resolution="$(fbset | grep 'geometry' | awk '{print $2,$3}')"
+        width="$(echo "$resolution" | awk '{print $1}')"
+        height="$(echo "$resolution" | awk '{print $2}')"
+        draw_rect="-draw_rect 0,0,${width},${height}"
+    fi
+
     case "$ROM_NAME" in
     *"Splore"* | *"splore"*)
         enabled="$(cat /sys/class/net/wlan0/operstate 2>/dev/null)"
@@ -99,7 +116,7 @@ launch_cart() {
             -home "$HOME" \
             -joystick 0 \
             -root_path "$ROM_FOLDER" \
-            -splore
+            -splore $draw_rect
 
         ;;
     *)
@@ -108,7 +125,7 @@ launch_cart() {
             -home "$HOME" \
             -joystick 0 \
             -root_path "$ROM_FOLDER" \
-            -run "$ROM_PATH"
+            -run "$ROM_PATH" $draw_rect
         ;;
     esac
 
