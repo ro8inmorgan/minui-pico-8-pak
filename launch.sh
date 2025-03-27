@@ -30,6 +30,10 @@ export SCREENSHOT_DIR="$SDCARD_PATH/Screenshots"
 copy_carts() {
     ROM_FOLDER="$1"
 
+    if [ ! -f "$USERDATA_PATH/Pico-8-native/copy-carts" ]; then
+        return
+    fi
+
     for cart in "$HOME/bbs/carts"/*.p8.png; do
         # remove the -0.p8.png extension
         CART_NAME="${cart%-0.p8.png}"
