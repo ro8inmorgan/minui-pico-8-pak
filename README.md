@@ -72,7 +72,7 @@ Any game that creates in-game saves will save these to `$SDCARD_PATH/.userdata/s
 
 To run splore, create a `Splore.p8` file in `/Roms/Pico-8 (PICO)` (it can be empty). Choosing this game in MinUI will launch the Splore UI. If no wifi connection is available, Splore will fail to start.
 
-Carts downloaded via Splore will be copied to the `/Roms/Pico-8 (PICO)` folder of your SD card, though they may not have the correct names due to API limitations. Please rename them as appropriate.
+Carts downloaded via Splore will only be available via Splore. To copy them to the `/Roms/Pico-8 (PICO)` folder of your SD card, create a file named `copy-carts` in `$SDCARD_PATH/.userdata/$PLATFORM/Pico-8-native` folder.
 
 To exit Splore, choose a game and follow the normal process of exiting a game.
 
