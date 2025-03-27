@@ -37,9 +37,9 @@ copy_carts() {
 
         if [ -f "$HOME/bbs/carts/temp-$FILENAME.nfo" ]; then
             TITLE="$(grep title: "$HOME/bbs/carts/temp-$FILENAME.nfo" | cut -d: -f2-)"
-            cp -f "$cart" "$ROM_FOLDER/$TITLE.p8"
+            cp -f "$cart" "$ROM_FOLDER/$TITLE.p8.png"
         else
-            cp -f "$cart" "$ROM_FOLDER/$FILENAME.p8"
+            cp -f "$cart" "$ROM_FOLDER/$FILENAME"
         fi
     done
     sync
