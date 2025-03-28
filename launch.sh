@@ -85,23 +85,15 @@ get_controller_file() {
 
 launch_cart() {
     ROM_PATH="$1"
-
-    ROM_FOLDER="$(dirname "$ROM_PATH")"
-    ROM_NAME="$(basename "$ROM_PATH")"
-    ROM_EXTENSION="${ROM_NAME##*.}"
-
-    # ignore carts that don't have a .p8 or .p8.png extension
-    if [ "$ROM_EXTENSION" != "p8" ] && [ "$ROM_EXTENSION" != "png" ]; then
-        show_message "Cart file $ROM_NAME does not have a .p8 or .p8.png extension and is not supported" 4
-        return 1
-    fi
-
     cp -f "$PAK_DIR/controllers/$(get_controller_file)" "$HOME/sdl_controllers.txt"
     cp -f "$PAK_DIR/config/$PLATFORM.txt" "$HOME/config.txt"
 
     echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 
     pico_bin="$(get_pico_bin)"
+
+    ROM_FOLDER="$(dirname "$ROM_PATH")"
+    ROM_NAME="$(basename "$ROM_PATH")"
 
     # only set LD_LIBRARY_PATH for pico8
     export LD_LIBRARY_PATH="$EMU_DIR/lib:$PAK_DIR/lib/$PLATFORM:$PAK_DIR/lib/$architecture:$LD_LIBRARY_PATH"
@@ -143,6 +135,7 @@ launch_cart() {
 
     sync
     copy_carts "$ROM_FOLDER"
+
 }
 
 verify_platform() {
