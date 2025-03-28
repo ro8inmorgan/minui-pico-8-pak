@@ -53,8 +53,6 @@ The following filetypes are supported:
 
 - Native: `.p8`, `.p8.png`
 
-Loading any files with other extensions will display an error before exiting.
-
 ### Exiting a game
 
 To exit a game:
